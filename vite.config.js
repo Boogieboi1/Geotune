@@ -2,7 +2,7 @@ import restart from 'vite-plugin-restart'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/GeotuneAlpha/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/Geotune/' : '/',
   root: 'src/',
   publicDir: '../static/',
   server: {
