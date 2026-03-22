@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/' : '/',
   root: 'src/',
-  publicDir: '../static/',
+  publicDir: '../public/',
   server: {
     host: true,
     open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env)
@@ -15,6 +15,6 @@ export default defineConfig({
     sourcemap: true
   },
   plugins: [
-    restart({ restart: ['../static/**'] })
+    restart({ restart: ['../public/**'] })
   ]
 })
