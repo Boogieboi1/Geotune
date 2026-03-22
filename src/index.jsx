@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { Suspense, useState } from 'react'
 import { Leva } from 'leva'
 import Experience from './Experience.jsx'
+import React from 'react'
 
 function App() {
   const [betaEnabled, setBetaEnabled] = useState(false)
