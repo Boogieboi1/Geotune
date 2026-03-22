@@ -95,7 +95,7 @@ export default function Experience({ betaEnabled }) {
 
     const link = document.createElement('a')
     link.href = url
-    link.download = `Geotune-${profile}-${timestamp}.stl`
+    link.download = `Geotune-Beta-${timestamp}.stl`
     link.click()
 
     URL.revokeObjectURL(url)
