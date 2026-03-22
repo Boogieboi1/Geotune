@@ -28,7 +28,7 @@ function App() {
           fov: 45,
           near: 0.1,
           far: 10000,
-          position: [0, 0,200]
+          position: [0, 0,225]
         }}
       >
         <color attach="background" args={['#111']} />
