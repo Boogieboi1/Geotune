@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei'
 import { useEffect } from 'react'
 
 export default function LogoGeotune({ exportRef }) {
-  const { scene } = useGLTF('/GeotuneAlpha/LogoGeotune.glb')
+  const { scene } = useGLTF('/LogoGeotune.glb')
 
   useEffect(() => {
     if (exportRef) {
