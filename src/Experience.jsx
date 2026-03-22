@@ -12,8 +12,8 @@ import Test from './Extrusions/Test'
 import LogoGeotune from './Extrusions/LogoGeotune'
 
 function BetaTools({ setProfile, exportToSTL }) {
-  useControls('Profiles', {
-    profile: {
+  useControls('3D model', {
+    '3D model': {
       value: 'logogeotune',
       options: {
         'Logo Geotune': 'logogeotune',
@@ -29,7 +29,7 @@ function BetaTools({ setProfile, exportToSTL }) {
     }
   })
 
-  useControls('Export', {
+  useControls(' Export', {
     exportSTL: button(() => exportToSTL())
   })
 
