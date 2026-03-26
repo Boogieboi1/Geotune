@@ -13,7 +13,7 @@ import LogoGeotune from './Extrusions/LogoGeotune'
 
 function BetaTools({ setProfile, exportToSTL }) {
   useControls('3D model', {
-    '3D model': {
+    model: {
       value: 'logogeotune',
       options: {
         'Logo Geotune': 'logogeotune',
@@ -21,7 +21,6 @@ function BetaTools({ setProfile, exportToSTL }) {
         'Square tube section': 'box',
         'Simple handle': 'cabinethandle',
         Plate: 'plate',
-
       },
       onChange: (value) => {
         setProfile(value)
@@ -29,7 +28,7 @@ function BetaTools({ setProfile, exportToSTL }) {
     }
   })
 
-  useControls(' Export', {
+  useControls('Export', {
     exportSTL: button(() => exportToSTL())
   })
 
@@ -47,38 +46,11 @@ function BetaTools({ setProfile, exportToSTL }) {
 export default function Experience({ betaEnabled }) {
   const [profile, setProfile] = useState('logogeotune')
 
-  const logoGeotuneRef = useRef()
-  const roundRef = useRef()
-  const boxRef = useRef()
-  const plateRef = useRef()
-  const templateRef = useRef()
-  const cabinethandleRef = useRef()
-  const testRef = useRef()
-
-  const getActiveRef = () => {
-    switch (profile) {
-      case 'logogeotune':
-        return logoGeotuneRef
-      case 'round':
-        return roundRef
-      case 'box':
-        return boxRef
-      case 'plate':
-        return plateRef
-      case 'template':
-        return templateRef
-      case 'cabinethandle':
-        return cabinethandleRef
-      case 'test':
-        return testRef
-      default:
-        return null
-    }
-  }
+  // ✅ Single active ref (fixes stale reference issue)
+  const activeRef = useRef()
 
   const exportToSTL = () => {
-    const activeRef = getActiveRef()
-    const object = activeRef?.current
+    const object = activeRef.current
 
     if (!object) {
       console.error('Geen object gevonden om te exporteren.')
@@ -117,13 +89,34 @@ export default function Experience({ betaEnabled }) {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      {profile === 'logogeotune' && <LogoGeotune exportRef={logoGeotuneRef} />}
-      {profile === 'round' && <RoundProfile exportRef={roundRef} material={material} />}
-      {profile === 'box' && <BoxProfile exportRef={boxRef} material={material} />}
-      {profile === 'plate' && <Plate exportRef={plateRef} material={material} />}
-      {profile === 'cabinethandle' && <CabinetHandle exportRef={cabinethandleRef} material={material} />}
-      {profile === 'template' && <Template exportRef={templateRef} material={material} />}
-      {profile === 'test' && <Test exportRef={testRef} material={material} />}
+      {/* ✅ Only ONE ref passed to active component */}
+      {profile === 'logogeotune' && (
+        <LogoGeotune key={profile} exportRef={activeRef} />
+      )}
+
+      {profile === 'round' && (
+        <RoundProfile key={profile} exportRef={activeRef} material={material} />
+      )}
+
+      {profile === 'box' && (
+        <BoxProfile key={profile} exportRef={activeRef} material={material} />
+      )}
+
+      {profile === 'plate' && (
+        <Plate key={profile} exportRef={activeRef} material={material} />
+      )}
+
+      {profile === 'cabinethandle' && (
+        <CabinetHandle key={profile} exportRef={activeRef} material={material} />
+      )}
+
+      {profile === 'template' && (
+        <Template key={profile} exportRef={activeRef} material={material} />
+      )}
+
+      {profile === 'test' && (
+        <Test key={profile} exportRef={activeRef} material={material} />
+      )}
     </>
   )
 }
