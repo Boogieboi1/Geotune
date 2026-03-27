@@ -46,7 +46,7 @@ function BetaTools({ setProfile, exportToSTL }) {
 export default function Experience({ betaEnabled }) {
   const [profile, setProfile] = useState('logogeotune')
 
-  // ✅ Single active ref (fixes stale reference issue)
+  //Single active ref
   const activeRef = useRef()
 
   const exportToSTL = () => {
@@ -89,7 +89,7 @@ export default function Experience({ betaEnabled }) {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      {/* ✅ Only ONE ref passed to active component */}
+      {/* Only ONE ref passed to active component */}
       {profile === 'logogeotune' && (
         <LogoGeotune key={profile} exportRef={activeRef} />
       )}
